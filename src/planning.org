@@ -1,0 +1,20 @@
+* General
+** Notes
+   
+* Technical
+** Subsystems
+*** Parser
+**** Given a directory return a datastructure representing the data, or None to indicate that the data is not expected
+**** Sub-modes
+***** Allow for a quick boolean significance test
+***** Allow for shallow scan of just meta-data (stored and computed) 
+
+*** Slicer
+**** Return information about path for quick slicing 
+***** Which directory names (slugs) are "significant" in a given tree
+
+*** Network
+**** Drive distribution by git
+**** Compile remotely
+
+*** Driver/Porclain
