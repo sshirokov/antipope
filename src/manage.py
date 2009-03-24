@@ -1,0 +1,1 @@
+print "manage.py running"
