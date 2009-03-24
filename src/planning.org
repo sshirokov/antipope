@@ -1,6 +1,6 @@
 * General
 ** Notes
-   
+*** Will use file timestamps during compilation for date information.
 * Technical
 ** Subsystems
 *** Parser
@@ -8,13 +8,23 @@
 **** Sub-modes
 ***** Allow for a quick boolean significance test
 ***** Allow for shallow scan of just meta-data (stored and computed) 
-
 *** Slicer
 **** Return information about path for quick slicing 
 ***** Which directory names (slugs) are "significant" in a given tree
-
+***** Allow slicing by:
+****** Date
+****** N
+****** Would be nice
+******* filter expressions 
 *** Network
 **** Drive distribution by git
-**** Compile remotely
-
+**** Compile remotely with ssh
+**** Produce static content
 *** Driver/Porclain
+**** CLI (ssh caller)
+***** Easy to read
+***** Parser friendly
+***** Configurable
+****** ENV
+****** Flags
+****** Config files (yaml)
