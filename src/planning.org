@@ -1,6 +1,7 @@
 * General
 ** Notes
 *** Will use file timestamps during compilation for date information.
+*** Keep separate pieces accessible, but lean towards machine  
 * Technical
 ** Subsystems
 *** Parser
