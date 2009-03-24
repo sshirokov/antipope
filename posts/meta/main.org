@@ -1,0 +1,8 @@
+This is some text, some initial lines of the post
+* A heading
+** With a subheading
+   Contaiing some content
+** And a second heading
+   Here's some hello world code:
+   [[file:code/hello_world.py][A Hello World Example]]
+   This is a hello world example in python
