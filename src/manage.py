@@ -5,7 +5,10 @@ sys.path.append(os.path.join('..'))
 class UserError(Exception): pass
 
 def usage():
+    from tasks import tasklist
     print "Manage must be called with a command as an argument."
+    print "Commands available: (use: 'help <command>' to see more detail)"
+    print "\t", "\n\t".join(tasklist)
     sys.exit(0)
     
 def main(self, args):    
