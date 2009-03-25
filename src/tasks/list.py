@@ -10,7 +10,7 @@ def run(args):
     '''
     List available blogs
     '''
-    (options, args) = util.get_args(args)
+    (options, args) = util.get_args(args, OPTIONS, prog = 'list')
     slices = Slicer.slices.all()
     if not len(slices): return
     
@@ -18,5 +18,5 @@ def run(args):
 
 def help(args):
     print "Lists all available posts"
-    print util.get_help(OPTIONS)
+    print util.get_help(OPTIONS, prog = 'list')
     
