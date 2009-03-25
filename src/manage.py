@@ -1,5 +1,7 @@
 #!/usr/bin/env python
-import sys, os, re
+import sys, os, re, inspect
+sys.path.append(os.path.join('..'))
+print inspect.currentframe().f_code.co_filename
 
 class UserError(Exception): pass
 

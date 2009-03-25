@@ -1,5 +1,6 @@
 import os
-import Parser
+from parser import Parser
+from config import settings
 
 class Slicer(object):
     class slices:
@@ -9,7 +10,5 @@ class Slicer(object):
         '''
         @staticmethod
         def all():
-            return filter(Parser.is_article, os.listdir(Slicer._POST_ROOT))
-        
+            return filter(Parser.is_article, os.listdir(settings.POST_ROOT))
 
-print "Slicer loaded"

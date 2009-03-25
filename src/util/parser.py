@@ -1,6 +1,7 @@
 import os
 import yaml
 from yaml.error import YAMLError
+from config import settings
 
 class ParserError(Exception): 
     _STD_ERROR = "Error prasing for %(slug)s: %(error)s"
@@ -11,15 +12,12 @@ class ParserError(Exception):
                                                      'error': error})
 
 class Parser(object):
-    _POST_ROOT = 'posts'
-    _META_FILE = 'meta.yaml'
-
     @classmethod
     def get_meta(self, slug):
         '''
         Returns a dict of article meta data for the given slug
         '''
-        try: meta = open(os.path.join(self._POST_ROOT, slug, 'meta.yaml'))
+        try: meta = open(os.path.join(settings.POST_ROOT, slug, settings.META_FILE))
         except IOError, e: raise ParserError.std(slug, e)
         else:
             try: data = yaml.load(meta)
