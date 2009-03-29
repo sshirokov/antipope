@@ -1,3 +1,12 @@
+class ObjDict(dict):
+    def __init__(self, *args, **kwargs):
+        super(ObjDict, self).__init__(*args, **kwargs)
+        for k, v in self.items():
+            if type(v) == dict: self.update({k: ObjDict(v)})
+        
+    def __getattr__(self, key): return self[key]
+    def __setattr__(self, key, value): self[key] = (type(value) == dict) and ObjDict(value) or value
+
 def _get_optparser(**kwargs):
     from optparse import OptionParser
     kwargs = dict({'add_help_option': False,},

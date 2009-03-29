@@ -1,19 +1,19 @@
 import util
 from util.slicer import Slicer
 from util.parser import Parser
+from util.article import Article
 
-OPTIONS = (
-    ("name", ("-n", "--with-name"), dict(help = 'List slugs with full names',
-                                         action = 'store_true',
-                                         default = False)),)
+OPTIONS = (("name", ("-n", "--with-name"), dict(help = 'List slugs with full names',
+                                                action = 'store_true',
+                                                default = False)),)
 
-def _get_extra_data(slug, options):
+def format_extra_data(slug, options):
     '''
     Return a string to supplement a listing with
     given a slug and the set of options.
     '''
-    extra = ''
-    if options.name: extra += '- "%s"' % Parser.get_meta(slug).get('name', "*Untitled*")
+    article, extra = Article(slug), ''
+    if options.name: extra += '- "%s"' % article.meta.name or '*Untitled*'
     return extra
 
 def run(args):
@@ -24,7 +24,7 @@ def run(args):
     slices = Slicer.slices.all()
     if not len(slices): return
     for article in slices:
-        print article, _get_extra_data(article, options)
+        print article, format_extra_data(article, options)
         
 
 def help(args):
