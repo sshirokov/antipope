@@ -29,3 +29,8 @@ class Parser(object):
     def is_article(self, slug):
         try: return self.get_meta(slug) and True
         except ParserError: return False
+
+    @classmethod
+    def is_published(self, slug):
+        try: return self.get_meta(slug).get('status', '-undef-') == 'published'
+        except ParserError: return False

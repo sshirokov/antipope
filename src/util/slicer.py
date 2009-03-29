@@ -12,3 +12,9 @@ class Slicer(object):
         def all():
             return filter(Parser.is_article, os.listdir(settings.POST_ROOT))
 
+
+        @staticmethod
+        def published():
+            return filter(lambda a: \
+                              Parser.is_article(a) and Parser.is_published(a),
+                          os.listdir(settings.POST_ROOT))

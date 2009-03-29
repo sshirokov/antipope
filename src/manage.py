@@ -18,13 +18,17 @@ def main(self, args):
 
     if command == 'help' and ((len(args) > 0) or usage()):
         try: __import__('tasks.%s' % args[0], globals(), locals(), ['tasks']).help(args[1:])
-        except ImportError: raise UserError("No such command: %s" % args[0])
+        except ImportError, e:
+            if re.match("No module named", str(e)) and str(e).split(' ')[-1] == args[0]:
+                raise UserError("No such command: %s" % args[0])
+            else: raise
     else:
         try: __import__('tasks.%s' % command, globals(), locals(), ['tasks']).run(args)
         except ImportError, e:
-            if re.match("No module named", e.message) and e.message.split(' ')[-1] == command:
+            if re.match("No module named", str(e)) and str(e).split(' ')[-1] == command:
                 raise UserError("No such command: %s" % command)
             else: raise
+
 
     
 if __name__ == '__main__':
