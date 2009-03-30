@@ -1,4 +1,5 @@
 import os
+import yaml
 from config import settings
 from util.parser import Parser, ParserError
 from util.slicer import Slicer
@@ -12,7 +13,7 @@ class Article(object):
     '''
     def __init__(self, slug, *args, **kwargs):
         self.slug = slug
-        try: self.meta = ObjDict(Parser.get_meta(slug), default = False)
+        try: self.meta = ObjDict(Parser.get_meta(slug))
         except ParserError, e: raise ArticleError("Cannot get data for article")
 
     @property
@@ -26,10 +27,29 @@ class Article(object):
         if not self.meta.has_key('date'):
             self.meta.date = datetime.fromtimestamp(
                 os.stat(os.path.join(settings.POST_ROOT, self.slug)).st_mtime).isoformat()
+            self.save()
         return parser().parse(self.meta.date)
     
     def build(self, dest):
         return True
+
+    def save(self):
+        try:
+            meta_path = os.path.join(settings.POST_ROOT, self.slug, settings.META_FILE)
+            data = yaml.dump(self.meta.to_dict(),
+                             default_flow_style = False,
+                             explicit_start = True)
+            meta = open(meta_path + ".swp", "w")
+            meta.write(data)
+            meta.close()
+            os.rename(meta_path + ".swp", meta_path)
+        except yaml.YAMLError: return False
+        except IOError: return False
+        except OSError:
+            try: os.unlink(meta_path + ".swp")
+            except OSError: pass
+            return False
+        else: return True
 
     def __repr__(self):
         return "%s/'%s'" % (self.slug, self.meta.name or "*Untitled*")

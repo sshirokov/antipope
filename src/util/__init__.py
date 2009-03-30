@@ -3,7 +3,13 @@ class ObjDict(dict):
         super(ObjDict, self).__init__(*args, **kwargs)
         for k, v in self.items():
             if type(v) == dict: self.update({k: ObjDict(v)})
-        
+            
+    def to_dict(self):
+        r_self = self.copy()
+        for k, v in r_self.items():
+            if type(v) == ObjDict: r_self.update({k: v.to_dict()})
+        return r_self
+            
     def __getattr__(self, key): return self[key]
     def __setattr__(self, key, value): self[key] = (type(value) == dict) and ObjDict(value) or value
 

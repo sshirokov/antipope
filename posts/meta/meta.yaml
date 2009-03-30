@@ -1,6 +1,6 @@
---- 
+---
+author:
+  email: user@example.com
+  name: Example User
 name: Meta-blogging
 status: published
-author: 
-  name: Example User
-  email: user@example.com
