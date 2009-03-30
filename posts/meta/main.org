@@ -1,8 +1,42 @@
-This is some text, some initial lines of the post
-* A heading
-** With a subheading
-   Contaiing some content
-** And a second heading
-   Here's some hello world code:
-   [[file:code/hello_world.py][A Hello World Example]]
-   This is a hello world example in python
+## GENERATED HEADER
+#+OPTIONS: toc:nil num:nil author:nil creator:nil timestamp:nil
+#
+#WARNING: Title Intentionaly Left Blank, filled in from meta.yaml
+#         use with caution in org files
+#+TITLE: 
+## END GENERATED HEADER
+
+This meta file will highlight the features of org mode, 
+and show an example template
+
+* Examples
+** Quotes for everyone
+*** Reqular quote
+#+BEGIN_QUOTE
+Everyting I say will forever be important.\\
+--Slava
+#+END_QUOTE
+*** Verse
+#+BEGIN_VERSE
+This test
+  remains preserved
+All the time
+                Awesome
+#+END_VERSE
+*** Example
+#+BEGIN_EXAMPLE
+This is some example text
+It is generic
+  and preserved in a block
+#+END_EXAMPLE
+** Auto-Formattings
+*** Exponents
+a^2+b^2=c^2 \\
+*** Subscripts
+F_1 = 1 \\
+F_2 = 1 \\
+F_n = F_{n-1} + F_{n-2} \\
+*** Code
+Some code looking +good+, /clean/, *DRY*:
+#+INCLUDE "/Users/yshirokov/src/self/blog/posts/meta/code/hello_world.py" src python -n
+[[file:code/hello_world.py::print%20Hello%20World][Download Source]] (With a link)
