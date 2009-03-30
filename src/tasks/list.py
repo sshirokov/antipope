@@ -5,6 +5,9 @@ from util.article import Article
 
 OPTIONS = (("name", ("-n", "--with-name"), dict(help = 'List slugs with full names',
                                                 action = 'store_true',
+                                                default = False)),
+           ("date", ("-d", "--with-date"), dict(help = 'List slugs with timestamps',
+                                                action = 'store_true',
                                                 default = False)),)
 
 def format_extra_data(slug, options):
@@ -13,7 +16,8 @@ def format_extra_data(slug, options):
     given a slug and the set of options.
     '''
     article, extra = Article(slug), ''
-    if options.name: extra += '- "%s"' % article.name
+    if options.name: extra += '- "%s" ' % article.name
+    if options.date: extra += '- %s' % article.date
     return extra
 
 def run(args):

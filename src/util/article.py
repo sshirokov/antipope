@@ -1,4 +1,5 @@
-from datetime import datetime
+import os
+from config import settings
 from util.parser import Parser, ParserError
 from util.slicer import Slicer
 from util import ObjDict
@@ -20,10 +21,14 @@ class Article(object):
 
     @property
     def date(self):
-        return datetime.now()
+        from dateutil.parser import parser
+        from datetime import datetime
+        if not self.meta.has_key('date'):
+            self.meta.date = datetime.fromtimestamp(
+                os.stat(os.path.join(settings.POST_ROOT, self.slug)).st_mtime).isoformat()
+        return parser().parse(self.meta.date)
     
-    def write(self, dest):
-        
+    def build(self, dest):
         return True
 
     def __repr__(self):

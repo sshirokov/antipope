@@ -14,7 +14,7 @@ def build(slug, dest = config.settings.OUTPUT_BASE):
     try: article = Article(slug)
     except ArticleError: article = None
     print "Writing:", article or slug, "........",
-    status = article and article.write(dest)
+    status = article and article.build(dest)
     print {None: "[Article Error]",
            False: "[Write Error]"}.get(status, "[Done]")
     return article
