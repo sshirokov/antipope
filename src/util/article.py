@@ -62,13 +62,21 @@ class Article(object):
                 output = open(outfile)
                 output_soup = BeautifulSoup(output)
                 output.close()
-                
-                output = open(outfile, "w")
+                try: os.unlink(outfile)
+                except OSError: pass
+
+                try: os.makedirs(os.path.join(dest, self.path))
+                except OSError, e:
+                    if e.errno == 17: pass
+                    else: raise ArticleError("Unable to create output path")
+                    
+                output = open(os.path.join(dest, self.path, 'article.html'), "w")
                 output.write(output_soup.body.contents[1].renderContents())
                 output.close()
-            except IOError: raise ArticleError("Unable to open generated outfile")
+            except IOError: raise ArticleError("Unable to open output location")
             return True
-        else: return False
+        else:
+            return False
 
     def save(self):
         try:
