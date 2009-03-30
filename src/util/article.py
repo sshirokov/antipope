@@ -1,4 +1,4 @@
-import os
+import os, re
 import yaml
 from config import settings
 from util.parser import Parser, ParserError
@@ -51,7 +51,24 @@ class Article(object):
             elif style == 'relative': return os.path.join(settings.POST_ROOT, self.slug)
     
     def build(self, dest):
-        return True
+        from BeautifulSoup import BeautifulSoup
+        main = os.path.join(self.get_path('os', 'absolute'), settings.POST_FILE)
+        main_safe = main.replace('"', '\\"')
+        outfile = re.sub('\.org$', '.html', main)
+        cmd = '%(emacs)s --batch --load ~/.emacs --visit="%(file)s" --funcall org-export-as-html-batch > /dev/null 2> /dev/null' % dict(emacs = settings.EMACS_BIN,
+                                                                                                                                        file = main_safe)
+        if os.system(cmd) == 0 and os.path.isfile(outfile):
+            try:
+                output = open(outfile)
+                output_soup = BeautifulSoup(output)
+                output.close()
+                
+                output = open(outfile, "w")
+                output.write(output_soup.body.contents[1].renderContents())
+                output.close()
+            except IOError: raise ArticleError("Unable to open generated outfile")
+            return True
+        else: return False
 
     def save(self):
         try:
