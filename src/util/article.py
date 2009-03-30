@@ -29,6 +29,13 @@ class Article(object):
                 os.stat(os.path.join(settings.POST_ROOT, self.slug)).st_mtime).isoformat()
             self.save()
         return parser().parse(self.meta.date)
+
+    @property
+    def path(self):
+        return os.path.join(str(self.date.year),
+                            self.date.strftime("%m"),
+                            self.date.strftime("%d"),
+                            self.slug)
     
     def build(self, dest):
         return True

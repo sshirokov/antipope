@@ -10,7 +10,6 @@ OPTIONS = (("dest", ("-d", "--dest"), dict(help = 'Overwrite build destination (
 
 
 def build(slug, dest = config.settings.OUTPUT_BASE):
-    print "-> Will write to:", dest
     try: article = Article(slug)
     except ArticleError: article = None
     print "Writing:", article or slug, "........",
