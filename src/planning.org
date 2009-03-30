@@ -29,3 +29,8 @@
 ****** ENV
 ****** Flags
 ****** Config files (yaml)
+* Notes
+** Export command
+   emacs --batch --load ~/.emacs --visit=main.org --funcall org-export-as-html-batch
+*** Problems
+**** Loads entire .emacs file (Slow)   
