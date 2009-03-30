@@ -13,7 +13,7 @@ def format_extra_data(slug, options):
     given a slug and the set of options.
     '''
     article, extra = Article(slug), ''
-    if options.name: extra += '- "%s"' % article.meta.name or '*Untitled*'
+    if options.name: extra += '- "%s"' % article.name
     return extra
 
 def run(args):
