@@ -20,8 +20,9 @@ def build(slug, dest = config.settings.OUTPUT_BASE):
 
 def run(args):
     (options, args) = util.get_args(args, OPTIONS, prog = 'build')
-    articles = map(lambda slug: build(slug, options.dest),
-                   Slicer.slices.published())
+    articles = Slicer.sort(filter(lambda a: a, map(lambda slug: build(slug, options.dest),
+                                                   Slicer.slices.published())))
+    print "Published articles:", articles
 
 def help(args):
     print "Build output from 'published' article data."
