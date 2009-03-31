@@ -16,12 +16,12 @@ def build(slug, dest = config.settings.OUTPUT_BASE):
     status = article and article.build(dest)
     print {None: "[Article Error]",
            False: "[Write Error]"}.get(status, "[Done]")
-    return article
+    return status and article
 
 def run(args):
     (options, args) = util.get_args(args, OPTIONS, prog = 'build')
-    map(lambda slug: build(slug, options.dest),
-        Slicer.slices.published())
+    articles = map(lambda slug: build(slug, options.dest),
+                   Slicer.slices.published())
 
 def help(args):
     print "Build output from 'published' article data."

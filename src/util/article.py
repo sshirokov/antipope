@@ -56,9 +56,9 @@ class Article(object):
         outfile = re.sub('\.org$', '.html', main)
         cmd = '%(emacs)s --batch --load ~/.emacs --visit="%(file)s" --funcall org-export-as-html-batch > /dev/null 2> /dev/null' % dict(emacs = settings.EMACS_BIN,
                                                                                                                                         file = main_safe)
-        output_data = ''
+        output_data = None
         
-        if os.system(cmd) == 0 and os.path.isfile(outfile):
+        if os.path.isfile(main) and os.system(cmd) == 0 and os.path.isfile(outfile):
             try:
                 output = open(outfile)
                 output_data = output.read()
@@ -72,7 +72,8 @@ class Article(object):
 
     def build(self, dest):
         from BeautifulSoup import BeautifulSoup
-        base_html = self.generate()
+        try: base_html = self.generate()
+        except ArticleError: return None
         
         if base_html:
             output_soup = BeautifulSoup(base_html)
