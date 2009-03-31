@@ -6,7 +6,7 @@
 #+TITLE: 
 ## END GENERATED HEADER
 
-This meta file will highlight the features of org mode, 
+This exmple file will highlight the features of org mode, 
 and show an example template
 
 * Examples

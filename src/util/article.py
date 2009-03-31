@@ -49,27 +49,37 @@ class Article(object):
         elif type == 'os':
             if style == 'absolute': return os.path.join(os.getcwd(), self.get_path('os', 'relative'))
             elif style == 'relative': return os.path.join(settings.POST_ROOT, self.slug)
-    
-    def build(self, dest):
-        from BeautifulSoup import BeautifulSoup
+
+    def generate(self):
         main = os.path.join(self.get_path('os', 'absolute'), settings.POST_FILE)
         main_safe = main.replace('"', '\\"')
         outfile = re.sub('\.org$', '.html', main)
         cmd = '%(emacs)s --batch --load ~/.emacs --visit="%(file)s" --funcall org-export-as-html-batch > /dev/null 2> /dev/null' % dict(emacs = settings.EMACS_BIN,
                                                                                                                                         file = main_safe)
+        output_data = ''
+        
         if os.system(cmd) == 0 and os.path.isfile(outfile):
             try:
                 output = open(outfile)
-                output_soup = BeautifulSoup(output)
+                output_data = output.read()
                 output.close()
                 try: os.unlink(outfile)
                 except OSError: pass
+            except IOError: raise ArticleError("Unable to read article output")
+        else:
+            raise ArticleError("Command did not succeed or outfile was not generated.")
+        return output_data
 
-                try: os.makedirs(os.path.join(dest, self.path))
-                except OSError, e:
-                    if e.errno == 17: pass
-                    else: raise ArticleError("Unable to create output path")
-                    
+    def build(self, dest):
+        from BeautifulSoup import BeautifulSoup
+        base_html = self.generate()
+        
+        if base_html:
+            output_soup = BeautifulSoup(base_html)
+            try: os.makedirs(os.path.join(dest, self.path))
+            except OSError, e:
+                if e.errno != 17: raise ArticleError("Unable to create output path")
+            try:
                 output = open(os.path.join(dest, self.path, 'article.html'), "w")
                 output.write(output_soup.body.contents[1].renderContents())
                 output.close()
