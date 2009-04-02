@@ -100,7 +100,7 @@ def run(args):
     archive = Archive()
     articles = map(archive.add, Slicer.sort(Slicer.objects.all(), desc = True))
     if not options.quick:
-        pass
+        print "WARNING: Build refresh not implemented"
     archive.build(config.settings.OUTPUT_BASE, options)
     
 def help(args):
