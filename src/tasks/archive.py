@@ -5,7 +5,10 @@ import util
 from util.slicer import Slicer
 from util.article import Article, ArticleError
 
-OPTIONS = (("quick", ("-q", "--quick"), dict(help = 'Do not rebuild stale articles.',
+OPTIONS = (("dest", ("-d", "--dest"), dict(help = 'Overwrite build destination (Default: %default)',
+                                                action = 'store',
+                                                default = config.settings.OUTPUT_BASE)),
+           ("quick", ("-q", "--quick"), dict(help = 'Do not rebuild stale articles.',
                                                 action = 'store_true',
                                                 default = False)),)
 
@@ -101,7 +104,7 @@ def run(args):
     articles = map(archive.add, Slicer.sort(Slicer.objects.all(), desc = True))
     if not options.quick:
         print "WARNING: Build refresh not implemented"
-    archive.build(config.settings.OUTPUT_BASE, options)
+    archive.build(options.dest, options)
     
 def help(args):
     print "Build the archive of published articles"

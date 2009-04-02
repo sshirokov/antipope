@@ -5,7 +5,10 @@ import util
 from util.slicer import Slicer
 from util.article import Article, ArticleError
 
-OPTIONS = (("quick", ("-q", "--quick"), dict(help = 'Do not rebuild stale articles.',
+OPTIONS = (("dest", ("-d", "--dest"), dict(help = 'Overwrite build destination (Default: %default)',
+                                                action = 'store',
+                                                default = config.settings.OUTPUT_BASE)),
+           ("quick", ("-q", "--quick"), dict(help = 'Do not rebuild stale articles.',
                                                 action = 'store_true',
                                                 default = False)),)
 def run(args):
