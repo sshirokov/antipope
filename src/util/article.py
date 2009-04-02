@@ -32,6 +32,13 @@ class Article(object):
         return parser().parse(self.meta.date)
 
     @property
+    def year(self): return self.date.year
+    @property
+    def month(self): return self.date.month
+    @property
+    def day(self): return self.date.day
+
+    @property
     def path(self): return self.get_path()
     
     def get_path(self, type = 'url', style = 'relative'):

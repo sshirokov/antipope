@@ -4,12 +4,13 @@ from config import settings
 
 class Slicer(object):
     @classmethod
-    def sort(self, article_list, key = 'date'):
-        return sorted(article_list,
+    def sort(self, article_list, key = 'date', desc = False):
+        articles = sorted(article_list,
                       lambda a1, a2: \
                           (getattr(a1, key) < getattr(a2, key) and -1) or \
                           (getattr(a1, key) == getattr(a2, key) and 0) or \
                           (getattr(a1, key) > getattr(a2, key) and 1))
+        return (desc and articles[-1::-1]) or articles
 
     @classmethod
     def slugs_to_articles(self, slug_list, prune = False):
@@ -41,4 +42,4 @@ class Slicer(object):
 
 #Ugly, and should probably be done better, somehow
 for method in filter(lambda s: '__' not in s, dir(Slicer.slices)):
-    setattr(Slicer.objects, method, staticmethod(lambda *a, **k: Slicer.slugs_to_articles(getattr(Slicer.slices, method)(*a, **k))))
+    setattr(Slicer.objects, method, staticmethod(lambda *a, **k: Slicer.slugs_to_articles(getattr(Slicer.slices, method)(*a, **k), prune = True)))
