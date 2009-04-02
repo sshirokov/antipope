@@ -13,6 +13,10 @@ class ObjDict(dict):
     def __getattr__(self, key): return self[key]
     def __setattr__(self, key, value): self[key] = (type(value) == dict) and ObjDict(value) or value
 
+def month_name(month):
+    from datetime import datetime
+    return datetime(datetime.now().year, month, datetime.now().day).strftime("%B")
+
 def _get_optparser(**kwargs):
     from optparse import OptionParser
     kwargs = dict({'add_help_option': False,},
