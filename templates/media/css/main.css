@@ -2,11 +2,42 @@ body {
     background: #CECECE;
 }
 
+div#container {
+    width: 100%;
+    position: relative;
+}
+
 div#header {
-    min-width: 100%;
+    width: 100%;
     height: 100px;
     background: lightblue;
     position: relative;
+}
+
+div#content {
+    background: pink;
+    width: 70%;
+    position: relative;
+    float: left;
+    min-height: 600px;
+}
+
+div#content > * {
+    margin-right: 20px;
+}
+
+div#sidebar {
+    width: 30%;
+    float: left;
+    background: orange;
+}
+
+div#footer {
+    width: 100%;
+    background: lightgreen;
+    position: relative;
+    min-height: 75px;
+    float: left;
 }
 
 #header_text {
@@ -16,21 +47,10 @@ div#header {
     bottom: 0;
 }
 
-div#content {
-    background: pink;
-    /*width: 70%;*/
-    width: 70%;
-    position: relative;
-    float: left;
+
+div#sidebar h3 {
+    font-size: 16px;
+    text-decoration: underline;
+    text-align: center;
 }
 
-div#sidebar {
-    background: orange;
-    width: 30%;
-    position: relative;
-    float: left;
-}
-
-div#footer {
-    background: lightgreen;
-}
