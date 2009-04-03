@@ -3,6 +3,6 @@
 {% block content %}
   {% for article in articles %}
       {{ article.name }} -- {{ article.date }}
-      {% include "article.html" %}
+      {% include "article.html" with context %}
   {% endfor %}
 {% endblock %}

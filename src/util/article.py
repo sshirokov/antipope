@@ -78,7 +78,7 @@ class Article(object):
         main = os.path.join(self.get_path('os', 'absolute'), settings.POST_FILE)
         main_safe = main.replace('"', '\\"')
         outfile = re.sub('\.org$', '.html', main)
-        cmd = '%(emacs)s --batch --load ~/.emacs --visit="%(file)s" --funcall org-export-as-html-batch > /dev/null 2> /dev/null' % dict(emacs = settings.EMACS_BIN,
+        cmd = '%(emacs)s --batch --load ~/.emacs --visit="%(file)s" --funcall org-export-as-html-batch' % dict(emacs = settings.EMACS_BIN,
                                                                                                                                         file = main_safe)
         output_data = None
         
