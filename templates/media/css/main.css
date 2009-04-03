@@ -40,11 +40,12 @@ div#footer {
     float: left;
 }
 
-#header_text {
+#header_content {
     font-size: 36px;
     margin-left: 100px;
     position: absolute;
     bottom: 0;
+    display: inline;
 }
 
 

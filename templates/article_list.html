@@ -1,0 +1,9 @@
+{% extends "common.html" %}
+
+{% block content %}
+  {% for article in articles %}
+    <div id="article_{{ article.slug }}" class="article">
+      {{ article.name }} -- {{ article.date }}
+    </div>
+  {% endfor %}
+{% endblock %}
