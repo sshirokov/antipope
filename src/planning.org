@@ -38,3 +38,7 @@
    python-beautifulsoup
    python-yaml
    python-dateutil
+   emacs (Including some .emacs that'll load org)
+   python-distutils
+   python-dev
+   easy_install jinja2 #We depend on 2.1 not 2.0
