@@ -42,3 +42,4 @@
    python-distutils
    python-dev
    easy_install jinja2 #We depend on 2.1 not 2.0
+   emacs-goodies-el #htmlize.el
