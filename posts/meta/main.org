@@ -38,5 +38,5 @@ F_2 = 1 \\
 F_n = F_{n-1} + F_{n-2} \\
 *** Code
 Some code looking +good+, /clean/, *DRY*:
-#+INCLUDE "/Users/yshirokov/src/self/blog/posts/meta/code/hello_world.py" src python -n
+#+INCLUDE "code/hello_world.py" src python -n
 [[file:code/hello_world.py::print%20Hello%20World][Download Source]] (With a link)
