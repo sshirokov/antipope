@@ -1,4 +1,4 @@
-import os
+import os, sys
 import yaml
 from yaml.error import YAMLError
 from config import settings
@@ -18,10 +18,14 @@ class Parser(object):
         Returns a dict of article meta data for the given slug
         '''
         try: meta = open(os.path.join(settings.POST_ROOT, slug, settings.META_FILE))
-        except IOError, e: raise ParserError.std(slug, e)
+        except IOError, e:
+            sys.stderr.write("Error: %s", str(e))
+            raise ParserError.std(slug, e)
         else:
             try: data = yaml.load(meta)
-            except YAMLError, e: raise (meta.close() or ParserError.std(slug, e))
+            except YAMLError, e:
+                sys.stderr.write("Error: %s", str(e))
+                raise (meta.close() or ParserError.std(slug, e))
             return meta.close() or data
 
     
