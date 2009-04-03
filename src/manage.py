@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys, os, re, inspect
 sys.path.append(os.path.join('..'))
+sys.path.append(os.getcwd())
 
 class UserError(Exception): pass
 
