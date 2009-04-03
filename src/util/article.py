@@ -32,6 +32,18 @@ class Article(object):
         return parser().parse(self.meta.date)
 
     @property
+    def compiled(self):
+        output_file = os.path.join(self.get_path('output', 'absolute'), 'article.html')
+        if not os.path.isfile(output_file) and not self.build(settings.OUTPUT_BASE):
+            raise ArticleError("Do not have, and cannot build compiled output: %s" % output_file)
+        try:
+            output_f = open(output_file)
+            output = output_f.read()
+            output_f.close()
+        except IOError: raise ArticleError("Cannot read compiled output: %s" % output_file)
+        return output
+            
+    @property
     def year(self): return self.date.year
     @property
     def month(self): return self.date.month
@@ -43,7 +55,7 @@ class Article(object):
     
     def get_path(self, type = 'url', style = 'relative'):
         stderror = lambda type, style, message = '': ArticleSystemError("Cannot return a path of %s/%s%s" % (type, style, message and ": %s" % message))
-        if not (type in ('url', 'os') and style in ('relative', 'absolute')): raise stderror(type, style)
+        if not (type in ('url', 'os', 'output') and style in ('relative', 'absolute')): raise stderror(type, style)
         if type == 'url':
             if style == 'absolute':
                 try: return "%s/%s" % (settings.BASE_URL, self.get_path('url', 'relative'))
@@ -53,9 +65,14 @@ class Article(object):
                                     self.date.strftime("%m"),
                                     self.date.strftime("%d"),
                                     self.slug])
+        if type == 'output':
+            if style == 'relative': return os.path.join(settings.OUTPUT_BASE,
+                                                        self.get_path('url', 'relative').replace('/', os.path.sep))
+            if style == 'absolute': return os.path.abspath(self.get_path('output', 'relative'))
         elif type == 'os':
-            if style == 'absolute': return os.path.join(os.getcwd(), self.get_path('os', 'relative'))
-            elif style == 'relative': return os.path.join(settings.POST_ROOT, self.slug)
+            if style == 'absolute': path = os.path.abspath(self.get_path('os', 'relative'))
+            elif style == 'relative': path = os.path.join(settings.POST_ROOT, self.slug)
+            return path
 
     def generate(self):
         main = os.path.join(self.get_path('os', 'absolute'), settings.POST_FILE)
