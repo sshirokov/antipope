@@ -34,3 +34,7 @@
    emacs --batch --load ~/.emacs --visit=main.org --funcall org-export-as-html-batch
 *** Problems
 **** Loads entire .emacs file (Slow)   
+** Dependencies (Ubuntu)
+   python-beautifulsoup
+   python-yaml
+   python-dateutil
