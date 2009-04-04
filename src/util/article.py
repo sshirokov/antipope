@@ -26,9 +26,9 @@ class Article(object):
         from dateutil.parser import parser
         from datetime import datetime
         date = (self.meta.has_key('date') and parser().parse(self.meta.date)) or \
-            datetime.fromtimestamp(os.stat(os.path.join(settings.POST_ROOT, self.slug)).st_mtime).isoformat()
+            datetime.fromtimestamp(os.stat(os.path.join(settings.POST_ROOT, self.slug)).st_mtime)
         if not self.meta.has_key('date') and self.meta.get('status', '*no-status*') == 'published':
-            self.meta.date = date
+            self.meta.date = date.isoformat()
             self.save()
         return date
 
