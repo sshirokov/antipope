@@ -44,6 +44,7 @@ div#sidebar {
 }
 
 div#footer {
+    margin-top: 5px;
     width: 100%;
     position: relative;
     min-height: 75px;
