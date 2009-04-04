@@ -19,7 +19,7 @@ class Parser(object):
         '''
         try: meta = open(os.path.join(settings.POST_ROOT, slug, settings.META_FILE))
         except IOError, e:
-            sys.stderr.write("Error: %s", str(e))
+            sys.stderr.write("Error: %s" % str(e))
             raise ParserError.std(slug, e)
         else:
             try: data = yaml.load(meta)
