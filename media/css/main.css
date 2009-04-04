@@ -4,6 +4,7 @@ body {
 
 div#container {
     width: 100%;
+    min-width: 1000px;
     position: relative;
 }
 
