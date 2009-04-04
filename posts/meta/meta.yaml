@@ -2,6 +2,5 @@
 author:
   email: user@example.com
   name: Example User
-date: '2009-03-30T19:31:25'
 name: Meta-blogging
-status: published
+status: draft

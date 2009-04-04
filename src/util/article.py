@@ -25,11 +25,12 @@ class Article(object):
     def date(self):
         from dateutil.parser import parser
         from datetime import datetime
-        if not self.meta.has_key('date'):
-            self.meta.date = datetime.fromtimestamp(
-                os.stat(os.path.join(settings.POST_ROOT, self.slug)).st_mtime).isoformat()
+        date = (self.meta.has_key('date') and parser().parse(self.meta.date)) or \
+            datetime.fromtimestamp(os.stat(os.path.join(settings.POST_ROOT, self.slug)).st_mtime).isoformat()
+        if not self.meta.has_key('date') and self.meta.get('status', '*no-status*') == 'published':
+            self.meta.date = date
             self.save()
-        return parser().parse(self.meta.date)
+        return date
 
     @property
     def compiled(self):
