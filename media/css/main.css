@@ -20,7 +20,7 @@ div#content {
     position: relative;
     float: left;
     min-height: 600px;
-    min-width: 600px;
+    min-width: 500px;
     background: white;
 }
 
