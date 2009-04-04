@@ -19,6 +19,7 @@ div#content {
     position: relative;
     float: left;
     min-height: 600px;
+    background: white;
 }
 
 div#content > * {
