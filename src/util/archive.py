@@ -13,8 +13,7 @@ class Archive(object):
         self._archive = {}
         template_path = os.path.abspath(config.settings.TEMPLATE_DIR)
         self.jenv = jinja2.Environment(loader = jinja2.FileSystemLoader([template_path,
-                                                                        os.path.join(template_path, 'defaults')]
-                                                                        ))
+                                                                        os.path.join(template_path, 'defaults')]))
         super(Archive, self).__init__(*args, **kwargs)
 
     def add(self, article):
