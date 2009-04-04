@@ -13,6 +13,8 @@ div#header {
     height: 100px;
     position: relative;
     border-bottom: 1px dotted black;
+    background: white;
+    margin-bottom: 5px;
 }
 
 div#content {
@@ -43,6 +45,7 @@ div#footer {
     position: relative;
     min-height: 75px;
     float: left;
+    background: white;
 }
 
 #header_content {
