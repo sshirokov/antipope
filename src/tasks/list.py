@@ -8,6 +8,9 @@ OPTIONS = (("name", ("-n", "--with-name"), dict(help = 'List slugs with full nam
                                                 default = False)),
            ("date", ("-d", "--with-date"), dict(help = 'List slugs with timestamps',
                                                 action = 'store_true',
+                                                default = False)),
+           ("status", ("-s", "--with-status"), dict(help = 'List slugs with status',
+                                                action = 'store_true',
                                                 default = False)),)
 
 def format_extra_data(slug, options):
@@ -17,7 +20,8 @@ def format_extra_data(slug, options):
     '''
     article, extra = Article(slug), ''
     if options.name: extra += '- "%s" ' % article.name
-    if options.date: extra += '- %s' % article.date
+    if options.date: extra += '- %s ' % article.date
+    if options.status: extra += '- status: %s ' % article.meta.get('status', '*undef*')
     return extra
 
 def run(args):
