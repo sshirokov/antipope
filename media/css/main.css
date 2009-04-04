@@ -15,7 +15,6 @@ div#header {
 }
 
 div#content {
-    background: pink;
     width: 70%;
     position: relative;
     float: left;
@@ -29,7 +28,8 @@ div#content > * {
 div#sidebar {
     width: 30%;
     float: left;
-    background: orange;
+    background: white;
+    border: 1px solid black;
 }
 
 div#footer {
