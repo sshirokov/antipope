@@ -33,6 +33,9 @@ class Article(object):
         return date
 
     @property
+    def status(self): return self.meta.get('status', '*undef*')
+
+    @property
     def compiled(self):
         output_file = os.path.join(self.get_path('output', 'absolute'), 'article.html')
         if not os.path.isfile(output_file) and not self.build(settings.OUTPUT_BASE):

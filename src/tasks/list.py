@@ -21,7 +21,7 @@ def format_extra_data(slug, options):
     article, extra = Article(slug), ''
     if options.name: extra += '- "%s" ' % article.name
     if options.date: extra += '- %s ' % article.date
-    if options.status: extra += '- status: %s ' % article.meta.get('status', '*undef*')
+    if options.status: extra += '- status: %s ' % article.status
     return extra
 
 def run(args):
