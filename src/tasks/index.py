@@ -12,13 +12,6 @@ OPTIONS = (("dest", ("-d", "--dest"), dict(help = 'Overwrite build destination (
                                                 action = 'store_true',
                                                 default = False)),)
 
-def copy_media():
-    import shutil
-    shutil.rmtree(os.path.join(config.settings.OUTPUT_BASE, config.settings.MEDIA_DIR),
-                  ignore_errors = True)
-    shutil.copytree(config.settings.MEDIA_DIR, os.path.join(config.settings.OUTPUT_BASE,
-                                                            config.settings.MEDIA_DIR))
-
 def build_main(dest, archive, options):
     '''
     Build the front page
@@ -32,7 +25,6 @@ def build_main(dest, archive, options):
                                             desc = True))))
         index.close()
     except IOError, e: return False
-    copy_media()
     return True
 
 def run(args):
