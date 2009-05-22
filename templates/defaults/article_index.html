@@ -1,0 +1,16 @@
+{% extends "common.html" %}
+
+{% block content %}
+  <div id="article_{{ article.slug }}_container">
+    {{ article.name }} -- INDEX
+    <span id="article_{{ article.slug }}_title" class="article_title">
+      <a href="/{{ article.path }}">{{ article.name }}</a>
+    </span>
+    <span id="article_{{ article.slug }}_date" class="article_date">
+      {{ article.date_string }}
+    </span>
+    <span id="article_{{ article.slug }}_author" class="article_author">
+      {{ article.author }}
+    </span>
+  </div>
+{% endblock %}

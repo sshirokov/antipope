@@ -22,6 +22,9 @@ class Article(object):
         return self.meta.get('name', "*Untitled*")
 
     @property
+    def date_string(self):
+        return self.date.isoformat(' ')
+    @property
     def date(self):
         from dateutil.parser import parser
         from datetime import datetime
@@ -53,7 +56,16 @@ class Article(object):
     def month(self): return self.date.month
     @property
     def day(self): return self.date.day
-
+    
+    @property
+    def author(self):
+        author_string = ''
+        if type(self.meta.get('author', None)) == list:
+            author_string = ', '.join(map(lambda author: author.get('name', 'Anonymous'),
+                                          self.meta['author']))
+        return author_string or self.meta.get('author', {}).get('name', 'Anonymous')
+            
+    
     @property
     def path(self): return self.get_path()
     
